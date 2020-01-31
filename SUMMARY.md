@@ -4,6 +4,6 @@
 
 ## Typescript проект <a id="project"></a>
 
-* [Контекст компиляции](project/compilation-context/README.md)
-  * [Пространство декларации](project/compilation-context/declarationspaces.md)
+* [Контекст компиляции](project/compilation-context.md)
+* [Пространство декларации](project/declarationspaces.md)
 
