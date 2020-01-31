@@ -1,8 +1,8 @@
 # Table of contents
 
-* [Вступление](README.md)
+* [Понимание Typescript](README.md)
 
-## Typescript проект
+## Typescript проект <a id="project"></a>
 
-* [Контекст компиляции](typescript-proekt/kontekst-kompilyacii.md)
+* [Контекст компиляции](project/compilation-context.md)
 
