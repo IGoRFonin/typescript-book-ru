@@ -10,3 +10,7 @@
 * [Пространства имен](project/namespaces.md)
 * [Динамический импорт выражений](project/dynamic-import-expressions.md)
 
+## Система типов Typescript <a id="typescript-type-system"></a>
+
+* [Обзор](typescript-type-system/overview.md)
+
