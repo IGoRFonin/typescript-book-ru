@@ -71,5 +71,18 @@ const bar = foo; // allow
 
 ### Синтаксис модуля ES
 
+* Используйте ключевое слово `export` для экспорта переменной \(или типа\):
+
+{% code title="foo.ts" %}
+```typescript
+export const someVar = 123;
+export type someType = {
+  foo: string;
+};
+```
+{% endcode %}
+
+
+
 
 
