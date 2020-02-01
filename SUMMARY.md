@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Понимание Typescript](README.md)
+* [Глубокое понимание Typescript](README.md)
 
 ## Typescript проект <a id="project"></a>
 

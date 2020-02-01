@@ -1,2 +1,2 @@
-# Понимание Typescript
+# Глубокое понимание Typescript
 
