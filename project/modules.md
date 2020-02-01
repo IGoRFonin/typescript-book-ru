@@ -73,16 +73,80 @@ const bar = foo; // allow
 
 * Используйте ключевое слово `export` для экспорта переменной \(или типа\):
 
-{% code title="foo.ts" %}
 ```typescript
+// foo.ts
 export const someVar = 123;
 export type someType = {
   foo: string;
 };
 ```
-{% endcode %}
 
+* Экспорт переменной или типа в отдельном операторе `export`: 
 
+```typescript
+// foo.ts
+const someVar = 123;
+type someType = {
+  type: string;
+};
+
+export { someVar, someType };
+```
+
+* Вы также можете переименовать переменные для экспорта:
+
+```typescript
+// foo.ts
+const someVar = 123;
+export { someVar as aDifferentName };
+```
+
+* Используйте ключевое слово `import` для импорта переменной или типа:
+
+```typescript
+// bar.ts
+import { someVar, someType } from './foo';
+```
+
+* Переименуйте импортированные переменные или типы:
+
+```typescript
+// bar.ts
+import { someVar as aDifferentName } from './foo';
+```
+
+* Помимо указания выходного значения для загрузки, вы также можете использовать глобальную загрузку, то есть указать объект со звездочкой \(\*\), и все выходные значения будут загружены в этот объект:
+
+```typescript
+// bar.ts
+import * as foo from './foo';
+// Вы можете использовать `foo.someVar` и` foo.someType` и
+// любые другие переменные или типы, экспортированные из `foo`
+```
+
+* Импортируйте файл только для побочного эффекта с помощью одного оператора import:
+
+```typescript
+import 'core-js'; // стандартная библиотека polyfill
+```
+
+* Общий экспорт после импорта из других модулей:
+
+```typescript
+export * from './foo';
+```
+
+* Реэкспорт только конкретных из другого модуля
+
+```typescript
+export { someVar } from './foo';
+```
+
+* Реэкспорт только конкретных из другого модуля с переименованием
+
+```typescript
+export { someVar as aDifferentName } from './foo';
+```
 
 
 
