@@ -6,4 +6,5 @@
 
 * [Контекст компиляции](project/compilation-context.md)
 * [Пространство декларации](project/declarationspaces.md)
+* [Модули](project/modules.md)
 
