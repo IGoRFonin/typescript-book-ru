@@ -13,5 +13,6 @@
 ## Typescript Система типов <a id="typescript-type-system"></a>
 
 * [Обзор](typescript-type-system/overview.md)
+* [Миграция с JavaScript](typescript-type-system/migrating.md)
 * [Декларация окружения](typescript-type-system/ambient.md)
 
