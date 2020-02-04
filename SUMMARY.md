@@ -17,4 +17,6 @@
 * [@types](typescript-type-system/types.md)
 * [Декларация окружения](typescript-type-system/ambient.md)
 * [Интерфейсы](typescript-type-system/interfaces.md)
+* [Перечисления](typescript-type-system/enums.md)
+* [Untitled](typescript-type-system/untitled.md)
 
