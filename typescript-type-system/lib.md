@@ -174,3 +174,162 @@ const today = Date.today();
 const todayAfter1second = today.addMilliseconds(1000);
 ```
 
+### string
+
+Если вы ищете `string` в `lib.d.ts`, вы найдете что-то похожее на `Date` \(глобальные переменные `String`, интерфейс `StringConstructor`, интерфейс `String`\). Но стоит отметить, что интерфейс `String` также влияет на строковые литералы, как показано ниже:
+
+```typescript
+interface String {
+  endsWith(suffix: string): boolean;
+}
+
+String.prototype.endsWith = function(suffix: string): boolean {
+  const str: string = this;
+  return str && str.indexOf(suffix, str.length - suffix.length) !== -1;
+};
+
+console.log('foo bar'.endsWith('bas')); // false
+console.log('foo bas'.endsWith('bas')); // true
+```
+
+### string redux
+
+Для удобства объявления мы рекомендуем создать файл `global.d.ts`. Тем не менее, если вы хотите, вы можете войти в глобальное пространство имен из файлового модуля, используя `declare global { / global namespace / }`:
+
+```typescript
+// Убедитесь, что это модуль
+export {};
+
+declare global {
+  interface String {
+    endsWith(suffix: string): boolean;
+  }
+}
+
+String.prototype.endsWith = function(suffix: string): boolean {
+  const str: string = this;
+  return str && str.indexOf(suffix, str.length - suffix.length) !== -1;
+};
+
+console.log('foo bar'.endsWith('bas')); // false
+console.log('foo bas'.endsWith('bas')); // true
+```
+
+## Используйте свой собственный `lib.d.ts` 
+
+Как упоминалось выше, использование параметра компиляции `--noLib` приведет к тому, что TypeScript автоматически исключит включенные файлы `lib.d.ts`. Почему эта функция работает, я перечислил несколько общих причин:
+
+* Рабочая среда JavaScript сильно отличается от стандартной среды выполнения на основе браузера;
+* Вы хотите строго контролировать глобальные переменные в своем коде, например: `lib.d.ts` определяет элемент как глобальную переменную, и вы не хотите, чтобы он просочился в ваш код.
+
+После исключения файла `lib.d.ts` по умолчанию вы можете включить файл с аналогичным именем в контекст компиляции, и TypeScript выберет его для проверки типа.
+
+{% hint style="info" %}
+Будьте осторожны с опцией `--noLib`: как только вы ее используете, использующие модуль также будут вынуждены использовать опцию `--noLib`, когда вы делитесь своим проектом с другими. Еще хуже, если вы привнесете внешний код в свой проект, вам может понадобиться также перенести код на основе `lib`.
+{% endhint %}
+
+## Влияние target компилятора на `lib.d.ts` 
+
+Установка `target` компиляции в `es6` может привести к тому, что `lib.d.ts` будет включать в себя более современные \(`es6`\) объявления среды, такие как `Promise`. Этот волшебный эффект целей компилятора изменяет среду кода, которая идеально подходит для некоторых людей, но вызывает путаницу у других, потому что смешивает скомпилированный код со средой.
+
+Если вам нужен более детальный контроль над вашей средой, вы должны использовать параметр `--lib`, который мы обсудим далее.
+
+### `--lib` опция
+
+Иногда вы хотите отделить связь между целью компиляции \(созданная версия JavaScript\) и поддержкой окружающих библиотек. Например, для `Promise` вашей целью компиляции является `--target es5`, но вы все равно хотите ее использовать. В настоящее время вы можете использовать `lib` для управления ею.
+
+{% hint style="info" %}
+Используйте параметр `--lib`, чтобы отделить любую библиотеку от `--target`.
+{% endhint %}
+
+Вы можете предоставить эту опцию компилятору из командной строки или в `tsconfig.json` \(рекомендуется\):
+
+### Командная строка
+
+```bash
+tsc --target es5 --lib dom,es6
+```
+
+### config.json
+
+```typescript
+"compilerOptions": {
+    "lib": ["dom", "es6"]
+}
+```
+
+`lib` может быть классифицированы следующим образом:
+
+
+
+* JavaScript
+  * es5
+  * es6
+  * es2015
+  * es7
+  * es2016
+  * es2017
+  * esnext
+* Runtime Environment
+  * dom
+  * dom.iterable
+  * webworker
+  * scripthost
+* ESNext Варианты функций
+  * es2015.core
+  * es2015.collection
+  * es2015.generator
+  * es2015.iterable
+  * es2015.promise
+  * es2015.proxy
+  * es2015.reflect
+  * es2015.symbol
+  * es2015.symbol.wellknown
+  * es2016.array.include
+  * es2017.object
+  * es2017.sharedmemory
+  * esnext.asynciterable
+
+{% hint style="info" %}
+Опция `--lib` обеспечивает очень детальный контроль, поэтому вы, скорее всего, выберете один из сред выполнения и один из категории объектов JavaScript. Если вы не укажете `--lib`, будет импортирована библиотека по умолчанию:
+
+* Для `--target es5` =&gt; es5, dom, scripthost
+* Для `--target es6` =&gt; es6, dom, dom.iterable, scripthost
+{% endhint %}
+
+Моя личная рекомендация:
+
+```typescript
+"compilerOptions": {
+  "target": "es5",
+  "lib": ["es6", "dom"]
+}
+```
+
+Включает ES5 с использованием Symbol:
+
+```typescript
+"compilerOptions": {
+  "target": "es5",
+  "lib": ["es5", "dom", "scripthost", "es2015.symbol"]
+}
+```
+
+## Polyfill при использовании старых движков JavaScript
+
+> [Egghead PRO видео о этой теме](https://egghead.io/lessons/typescript-using-es6-and-esnext-with-typescript)
+
+Чтобы использовать некоторые новые функции, такие как `Map`, `Set`, `Promise` \(которые будут меняться со временем\), вы можете использовать современные опции `lib` и вам нужно установить `core-js`:
+
+```bash
+npm install core-js --save-dev
+```
+
+Затем импортируйте его в свой проект:
+
+```typescript
+import 'core-js';
+```
+
+
+
