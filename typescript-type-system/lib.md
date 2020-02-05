@@ -128,3 +128,49 @@ Math.seedrandom();
 Math.seedrandom('Any string you want');
 ```
 
+### Date
+
+Если вы ищете объявление определения `Date` в `lib.d.ts`, вы найдете:
+
+```typescript
+declare var Date: DateConstructor;
+```
+
+Интерфейс `DateConstructor` такой же, как интерфейсы `Math` и `Window`, которые вы видели выше, поскольку он охватывает элементы глобальной переменной `Date`, которые можно использовать \(например, `Date.now()`\). Кроме того, он содержит подпись для конструктора \(например, `new Date()`\), которая позволяет создавать экземпляр `Date`. Часть кода для интерфейса `DateConstructor` выглядит следующим образом:
+
+```typescript
+interface DateConstructor {
+  new (): Date;
+  // ... other construct signatures
+
+  now(): number;
+
+  // ... other member functions
+}
+```
+
+В [datejs](https://github.com/abritinthebay/datejs) добавляют свойства как к глобальной переменной `Date`, так и к экземплярам `Date`, поэтому определение TypeScript этой библиотеки выглядит следующим образом \([сообщество уже определило его](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/datejs/index.d.ts)\)
+
+```typescript
+// DateJS добавил статические методы
+interface DateConstructor {
+  /** Gets a date that is set to the current date. The time is set to the start of the day (00:00 or 12:00 AM) */
+  today(): Date;
+  // ... so on and so forth
+}
+
+// DateJS дал доступ к публичным методам
+interface Date {
+  /** Adds the specified number of milliseconds to this instance. */
+  addMilliseconds(milliseconds: number): Date;
+  // ... so on and so forth
+}
+```
+
+Это позволяет вам делать это с проверкой типов:
+
+```typescript
+const today = Date.today();
+const todayAfter1second = today.addMilliseconds(1000);
+```
+
