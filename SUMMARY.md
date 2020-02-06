@@ -20,4 +20,5 @@
 * [Перечисления](typescript-type-system/enums.md)
 * [lib.d.ts](typescript-type-system/lib.md)
 * [Функции](typescript-type-system/functions.md)
+* [Подлежащий выкупу](typescript-type-system/callable.md)
 
