@@ -22,4 +22,5 @@
 * [Функции](typescript-type-system/functions.md)
 * [Подлежащий выкупу](typescript-type-system/callable.md)
 * [Тип утверждения](typescript-type-system/typeassertion.md)
+* [Freshness](typescript-type-system/freshness.md)
 
