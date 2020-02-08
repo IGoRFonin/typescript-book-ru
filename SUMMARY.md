@@ -21,4 +21,5 @@
 * [lib.d.ts](typescript-type-system/lib.md)
 * [Функции](typescript-type-system/functions.md)
 * [Подлежащий выкупу](typescript-type-system/callable.md)
+* [Тип утверждения](typescript-type-system/typeassertion.md)
 
