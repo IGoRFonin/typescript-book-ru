@@ -23,4 +23,5 @@
 * [Подлежащий выкупу](typescript-type-system/callable.md)
 * [Тип утверждения](typescript-type-system/typeassertion.md)
 * [Freshness](typescript-type-system/freshness.md)
+* [Тип защиты](typescript-type-system/typeguard.md)
 
