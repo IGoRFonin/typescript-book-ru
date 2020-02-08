@@ -24,4 +24,5 @@
 * [Тип утверждения](typescript-type-system/typeassertion.md)
 * [Freshness](typescript-type-system/freshness.md)
 * [Тип защиты](typescript-type-system/typeguard.md)
+* [Тип Литерал](typescript-type-system/literals.md)
 
