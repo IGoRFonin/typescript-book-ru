@@ -25,4 +25,5 @@
 * [Freshness](typescript-type-system/freshness.md)
 * [Тип защиты](typescript-type-system/typeguard.md)
 * [Литеральный тип](typescript-type-system/literals.md)
+* [readonly](typescript-type-system/readonly.md)
 
