@@ -27,4 +27,5 @@
 * [Литеральный тип](typescript-type-system/literals.md)
 * [readonly](typescript-type-system/readonly.md)
 * [Дженерики](typescript-type-system/generices.md)
+* [Тип вывода](typescript-type-system/typeinference.md)
 
