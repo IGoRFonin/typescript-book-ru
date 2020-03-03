@@ -28,4 +28,5 @@
 * [readonly](typescript-type-system/readonly.md)
 * [Дженерики](typescript-type-system/generices.md)
 * [Тип вывода](typescript-type-system/typeinference.md)
+* [Тип совместимости](typescript-type-system/typecompatibility.md)
 
